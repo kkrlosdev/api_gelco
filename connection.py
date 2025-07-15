@@ -33,9 +33,3 @@ def get_connection_gi():
     )
 
     return conn
-
-
-if __name__ == "__main__":
-    conn = get_connection_gi()
-    if conn is not None:
-        print(f'Conexión exitosa')
