@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  api_gelco:
+    build: .
+    container_name: api_gelco
+    ports:
+      - "8192:8000"
+    restart: unless-stopped
