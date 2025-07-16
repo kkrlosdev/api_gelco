@@ -4,6 +4,7 @@ from connection import get_connection_gi, get_connection_siesa
 import os
 import socket
 import pyodbc
+from utils.is_reachable import is_reachable
 
 load_dotenv()
 
@@ -18,10 +19,20 @@ async def check_health():
     try:
         ip_siesa = os.getenv("SERVER")
         ip_gi = os.getenv("SERVER_GI")
+
+        # Si no existen las variables de entorno en el .env
         if not ip_siesa:
             errors.append("Falta variable de entorno 'SERVER'")
         if not ip_gi:
             errors.append("Falta variable de entorno 'SERVER_GI'")
+
+        # Si no son alcanzables dentro de la red los servidores SQL.
+        if ip_siesa and not is_reachable(ip_siesa):
+            errors.append(f"No es alcanzable el servidor SIESA: {ip_siesa}")
+        if ip_gi and not is_reachable(ip_gi):
+            errors.append(f'No es alcanzable el servidor de Gelcoinfo: {ip_gi}')
+
+        # Si las IP's son inválidas.
         ip_remote_gi = socket.gethostbyname(ip_gi) if ip_gi else None
         ip_remote_siesa = socket.gethostbyname(ip_siesa) if ip_siesa else None
     except Exception as e:

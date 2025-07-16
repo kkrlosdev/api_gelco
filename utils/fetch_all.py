@@ -18,8 +18,3 @@ def fetch_all(cursor) -> list[dict]:
         {col: serialize(val) for col, val in zip(columns, row)}
         for row in rows
     ]
-
-def fetch_one(cursor) -> dict:
-    columns = [desc[0] for desc in cursor.description]
-    row = cursor.fetchone()
-    return dict(zip(columns, row) if row else None)

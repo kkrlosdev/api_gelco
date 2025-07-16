@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 from connection import get_connection_gi
-from utils import fetch_one
+from utils.fetch_one import fetch_one
 from fastapi import HTTPException
-from sql_runner import execute_dynamic_sql
+from utils.sql_runner import execute_dynamic_sql
 
 router = APIRouter(
     prefix="/listas",

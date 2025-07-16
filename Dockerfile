@@ -2,7 +2,7 @@ FROM python:3.12-slim
 
 # 1. Instalar utilidades básicas y dependencias
 RUN apt-get update && apt-get install -y \
-    curl gnupg2 apt-transport-https software-properties-common \
+    curl gnupg2 apt-transport-https software-properties-common iputils-ping \
     gcc g++ unixodbc-dev \
     && rm -rf /var/lib/apt/lists/*
 

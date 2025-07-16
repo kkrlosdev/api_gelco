@@ -1,4 +1,4 @@
-from utils import fetch_all
+from utils.fetch_all import fetch_all
 
 def execute_dynamic_sql(cursor, sql: str) -> list[dict]:
     cursor.execute(sql)

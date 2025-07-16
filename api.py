@@ -18,7 +18,7 @@ async def main():
     from routers.check_health import check_health
     result = await check_health()
     return {
-            "message": f"Servidor corriendo en: http://{local_ip}:8000",
+            "message": f"Servidor corriendo en: http://{local_ip}:8192",
             "ip_local": local_ip,
             "status_environment": result["status"],
             "details": result["details"] if result["status"] != "OK" else []
@@ -35,6 +35,5 @@ if __name__ == "__main__":
         app, # En producción cambiar a el objeto app
         host="0.0.0.0",
         port=8000,
-        log_config=None # Necesario al compilar 
         #reload=True       # Solo para desarrollo
     )

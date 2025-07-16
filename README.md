@@ -21,7 +21,6 @@ Retorna todas las órdenes de compra del sistema SIESA con tipo OCM, OCA, OCQ y 
 Ejecuta dinámicamente el código de una lista proveniente de Gelcoinfo y retorna su resultado.
 
 ---
-
 ## 🐳 Docker
 
 Para levantar la API con Docker Compose:

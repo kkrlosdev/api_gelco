@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from connection import get_connection_siesa
 from fastapi import HTTPException
-from utils import fetch_all
+from utils.fetch_all import fetch_all
 from fastapi.responses import JSONResponse
 
 router = APIRouter(
