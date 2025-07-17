@@ -9,7 +9,7 @@ router = APIRouter(
     tags=["Listas de Gelcoinfo"]
 )
 
-@router.get("/lista={genCod}", summary="Ejecuta dinámicamente el código de una lista de Gelcoinfo y retorna su resultado.")
+@router.get("/{genCod}", summary="Ejecuta dinámicamente el código de una lista de Gelcoinfo y retorna su resultado.")
 async def get_lista(genCod: str):
     try:
         conn = get_connection_gi()
