@@ -19,8 +19,8 @@ async def main():
     return {
             "message": f"Servidor corriendo en: http://{local_ip}:8192",
             "ip_local": local_ip,
-            "status_environment": result["status"],
-            "details": result["details"] if result["status"] != "OK" else []
+            "status_environment": result["status_environment"],
+            "details": result["details"] if result["status_environment"] != "OK" else []
         }
 
 app.include_router(ordenes_compra.router)
