@@ -28,3 +28,15 @@ Para levantar la API con Docker Compose:
 ```bash
 docker compose up --build -d
 ```
+
+### 🔧 Variables de entorno requeridas
+
+| Variable      | Descripción                                                             |
+|---------------|--------------------------------------------------------------------------|
+| `USER`        | Usuario de la base de datos principal                                    |
+| `PASSWORD`    | Contraseña del usuario de la base de datos                               |
+| `SERVER`      | IP del servidor SQL de SIESA                                             |
+| `SERVER_GI`   | IP del servidor SQL de Gelcoinfo                                         |
+| `DATABASE`    | Nombre de la base de datos de SIESA                                      |
+| `DATABASE_GI` | Nombre de la base de datos de Gelcoinfo                                  |
+| `HOST_IP`     | IP del host (fuera del contenedor) accesible desde el contenedor Docker |
