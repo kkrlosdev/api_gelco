@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from routers import listas_gi, fichas_tecnicas, ordenes_compra, check_health
 from dotenv import load_dotenv
-import socket
 import os
 
 load_dotenv()
