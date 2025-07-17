@@ -28,5 +28,5 @@ COPY . /api_gelco
 # 8. Instalar requerimientos
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 9. Ejecutar la API
-CMD ["python", "api.py"]
+# 9. Ejecutar la API en modo producción
+CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
