@@ -20,6 +20,7 @@ async def check_health():
     try:
         ip_siesa = os.getenv("SERVER")
         ip_gi = os.getenv("SERVER_GI")
+        ip_host = os.getenv("HOST_IP")
 
         # Si no existen las variables de entorno en el .env
         if not ip_siesa:
@@ -28,6 +29,9 @@ async def check_health():
         if not ip_gi:
             errors.append("Falta variable de entorno 'SERVER_GI'")
         runned_tests.append({'name': '¿Existe variable de entorno "SERVER_GI" para Servidor Gelcoinfo?', "result": 'OK' if ip_gi else 'Problemas detectados'})
+        if not ip_host:
+            errors.append("Falta variable de entorno 'HOST_IP'")
+        runned_tests.append({'name': '¿Existe variable de entorno "HOST_IP"?', "result": 'OK' if ip_host else 'Problemas detectados'})
 
         # Si no son alcanzables dentro de la red los servidores SQL.
         if ip_siesa and not is_reachable(ip_siesa):
@@ -42,7 +46,6 @@ async def check_health():
         runned_tests.append({'name': '¿Es válida la IP de Gelcoinfo?', 'result': 'OK' if ip_remote_gi else 'Problemas detectados'})
         ip_remote_siesa = socket.gethostbyname(ip_siesa) if ip_siesa else None
         runned_tests.append({'name': '¿Es válida la IP de SIESA?', 'result': 'OK' if ip_remote_siesa else 'Problemas detectados'})
-
     except Exception as e:
         errors.append(f'No resuelve IP del servidor: {e}')
 
