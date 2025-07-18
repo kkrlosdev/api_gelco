@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 from dotenv import load_dotenv
 from connection import get_connection_gi, get_connection_siesa
-import os
-import socket
-import pyodbc
 from utils.is_reachable import is_reachable
+from utils.is_valid_ip import is_valid
+import os
+import pyodbc
 
 load_dotenv()
 
@@ -32,7 +32,10 @@ async def check_health():
         if not ip_host:
             errors.append("Falta variable de entorno 'HOST_IP'")
         runned_tests.append({'name': '¿Existe variable de entorno "HOST_IP"?', "result": 'OK' if ip_host else 'Problemas detectados'})
+    except Exception as e:
+        errors.append("No se pueden obtener las variables de entorno, crear el archivo .env")
 
+    try:
         # Si no son alcanzables dentro de la red los servidores SQL.
         if ip_siesa and not is_reachable(ip_siesa):
             errors.append(f"No es alcanzable el servidor SIESA: {ip_siesa}")
@@ -40,14 +43,20 @@ async def check_health():
         if ip_gi and not is_reachable(ip_gi):
             errors.append(f'No es alcanzable el servidor de Gelcoinfo: {ip_gi}')
         runned_tests.append({'name': '¿Es alcanzable el servidor Gelcoinfo?', 'result': 'OK' if ip_gi and is_reachable(ip_gi) else 'Problemas detectados'})
-
-        # Si las IP's son inválidas.
-        ip_remote_gi = socket.gethostbyname(ip_gi) if ip_gi else None
-        runned_tests.append({'name': '¿Es válida la IP de Gelcoinfo?', 'result': 'OK' if ip_remote_gi else 'Problemas detectados'})
-        ip_remote_siesa = socket.gethostbyname(ip_siesa) if ip_siesa else None
-        runned_tests.append({'name': '¿Es válida la IP de SIESA?', 'result': 'OK' if ip_remote_siesa else 'Problemas detectados'})
     except Exception as e:
-        errors.append(f'No resuelve IP del servidor: {e}')
+        errors.append(f"No se pudo verificar la conectividad de red: {e}")
+
+    try:
+        # Si las IP's son inválidas.
+        if not is_valid(ip_gi):
+            errors.append('Es inválida la IP proporcionada para servidor SQL de Gelcoinfo')
+        runned_tests.append({'name': '¿Es válida la IP de Gelcoinfo?', 'result': 'OK' if is_valid(ip_gi) else 'Problemas detectados'})
+
+        if not is_valid(ip_siesa):
+            errors.append('Es inválida la IP proporcionada para servidor SQL de SIESA')
+        runned_tests.append({'name': '¿Es válida la IP de SIESA?', 'result': 'OK' if is_valid(ip_siesa) else 'Problemas detectados'})
+    except Exception as e:
+        errors.append(f'Comuníquese con TI, el código está maldito. Esto no pudo haber sucedido: {e}')
 
     # Diagnóstico de drivers
     try:
