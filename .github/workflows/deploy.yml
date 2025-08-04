@@ -1,4 +1,4 @@
-name: Deploy API Gelco
+name: Deploy API GELCO
 
 on:
   push:
@@ -7,14 +7,20 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
-    name: Despliegue automático de API Gelco
+    name: Despliegue automático en local
 
     steps:
-      - name: Clonar el repositorio
+      - name: Checkout del código
         uses: actions/checkout@v4
+
+      - name: Sincronizar código al directorio de producción
+        run: |
+          rsync -av --delete ./ /home/administrador/api_gelco/
+        working-directory: ${{ github.workspace }}
 
       - name: Reconstruir y levantar contenedor
         run: docker compose up --build -d
+        working-directory: /home/administrador/api_gelco
 
       - name: Limpiar imágenes colgantes
         run: docker image prune -f
