@@ -45,7 +45,9 @@ async def get_existencias_siesa():
             return JSONResponse(status_code=204, content=None)
         return JSONResponse(content=data)
     except Exception as e:
-        return JSONResponse(status_code=500, detail={'message': 'No se pudo resolver la petición', 'detail': str(e)})
+        return JSONResponse(status_code=500, content={'message': 'No se pudo resolver la petición', 'detail': str(e)})
     finally:
-        c.close()
-        conn.close()
+        if c is not None:
+            c.close()
+        if conn is not None:
+            conn.close()
