@@ -1,6 +1,7 @@
 services:
   api_gelco:
     build: .
+    image: api_gelco:latest
     container_name: api_gelco
     ports:
       - "8192:8000"
