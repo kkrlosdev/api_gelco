@@ -15,7 +15,7 @@ jobs:
 
       - name: Sincronizar código al directorio de producción
         run: |
-          rsync -av --delete --exclude='.env' ./ /home/administrador/api_gelco/
+          rsync -av --delete --filter='protect .env' ./ /home/administrador/api_gelco/
         working-directory: ${{ github.workspace }}
 
       - name: Reconstruir y levantar contenedor
