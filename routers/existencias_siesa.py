@@ -11,9 +11,9 @@ router = APIRouter(
 async def get_existencias_siesa():
     try:
         conn = get_connection_siesa()
-        c = conn.cursor()
+        cursor = conn.cursor()
 
-        c.execute("""
+        cursor.execute("""
     SELECT
         f120_id_cia Empresa, 
         f120_rowid rep_rowid, 
@@ -40,14 +40,14 @@ async def get_existencias_siesa():
         AND f150_id = 'AG001'
         AND f401_cant_existencia_1 > 0
         """)
-        data = fetch_all(c)
+        data = fetch_all(cursor)
         if not data:
             return JSONResponse(status_code=204, content=None)
         return JSONResponse(content=data)
     except Exception as e:
         return JSONResponse(status_code=500, content={'message': 'No se pudo resolver la petición', 'detail': str(e)})
     finally:
-        if c is not None:
-            c.close()
+        if cursor is not None:
+            cursor.close()
         if conn is not None:
             conn.close()

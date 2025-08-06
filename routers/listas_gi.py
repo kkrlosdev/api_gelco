@@ -13,20 +13,22 @@ router = APIRouter(
 async def get_lista(genCod: str):
     try:
         conn = get_connection_gi()
-        c = conn.cursor()
+        cursor = conn.cursor()
 
-        c.execute("SELECT * FROM for_gen WHERE genCod = ?", genCod)
-        record = fetch_one(c)
+        cursor.execute("SELECT * FROM for_gen WHERE genCod = ?", genCod)
+        record = fetch_one(cursor)
 
         if not record:
             raise HTTPException(status_code=404, detail="genCod no encontrado")
 
         dynamic_query = record['genUsrStr2']
-        result = execute_dynamic_sql(c, dynamic_query)
+        result = execute_dynamic_sql(cursor, dynamic_query)
 
         return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     finally:
-        c.close()
-        conn.close()
+        if cursor is not None:
+            cursor.close()
+        if conn is not None:
+            conn.close()

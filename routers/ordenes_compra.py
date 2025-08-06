@@ -12,9 +12,9 @@ router = APIRouter(
 async def get_ordenes_compra():
     try:
         conn = get_connection_siesa()
-        c = conn.cursor()
+        cursor = conn.cursor()
 
-        c.execute("""
+        cursor.execute("""
 SELECT
 	J.f200_razon_social AS 'descripcion_solicitante',
 	A.f420_consec_docto AS 'numero_solicitud',
@@ -54,10 +54,12 @@ ORDER BY
 	A.f420_fecha_ts_creacion DESC
 """)
     
-        data = fetch_all(c)
+        data = fetch_all(cursor)
         return JSONResponse(content=data, status_code=200)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     finally:
-        c.close()
-        conn.close()
+        if cursor is not None:
+            cursor.close()
+        if conn is not None:
+            conn.close()
