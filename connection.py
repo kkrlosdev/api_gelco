@@ -34,5 +34,6 @@ def get_connection_gi():
             f"UID={USER};"
             f"PWD={PASSWORD};"
         )
-    except Exception as e:
         return conn
+    except Exception as e:
+        return None
