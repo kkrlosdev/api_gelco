@@ -17,8 +17,11 @@ Consulta bloom, viscosidad y tamaño de grano de todas las fichas técnicas en s
 ### `GET /ordenes_compra`
 Retorna todas las órdenes de compra del sistema SIESA con tipo OCM, OCA, OCQ y OCN, generadas en los últimos 30 días, retorna la información relevante.
 
-### `GET /listas/lista={genCod}`
+### `GET /listas/{genCod}`
 Ejecuta dinámicamente el código de una lista proveniente de Gelcoinfo y retorna su resultado.
+
+### `GET /exi_siesa_rpto`
+Consulta existencias de materiales y repuestos en bodega general de SIESA (AG001).
 
 ---
 ## 🐳 Docker
