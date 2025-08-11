@@ -15,7 +15,15 @@ Verifica el estado de conexión, componentes y funcionamiento general de la API.
 Consulta bloom, viscosidad y tamaño de grano de todas las fichas técnicas en su versión más reciente.
 
 ### `GET /ordenes_compra`
-Retorna todas las órdenes de compra del sistema SIESA con tipo OCM, OCA, OCQ y OCN, generadas en los últimos 30 días, retorna la información relevante.
+Consulta todas las ordenes de compra de tipo OCM, OCA, OCQ, OCN de la cantidad de días atrás solicitada (por defecto, 30) y retorna información relevante.
+**Parámetros opcionales:**
+- `dias_atras` (int): Número de días hacia atrás para filtrar las órdenes. Por defecto: 30
+
+**Ejemplos de uso:**
+```
+GET /ordenes_compra
+GET /ordenes_compra?dias_atras=100
+```
 
 ### `GET /listas/{genCod}`
 Ejecuta dinámicamente el código de una lista proveniente de Gelcoinfo y retorna su resultado.
