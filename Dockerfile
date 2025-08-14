@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.12-slim-bookworm
 
 # 1. Instalar utilidades básicas y dependencias
 RUN apt-get update && apt-get install -y \
