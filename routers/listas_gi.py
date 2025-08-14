@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from connection import get_connection_gi
+from db.connection import get_connection_gi
 from utils.fetch_one import fetch_one
 from fastapi import HTTPException
 from utils.sql_runner import execute_dynamic_sql

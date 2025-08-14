@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from connection import get_connection_siesa
+from db.connection import get_connection_siesa
 from fastapi.responses import JSONResponse
 from utils.fetch_all import fetch_all
 
@@ -19,8 +19,10 @@ async def get_existencias_siesa():
         f120_rowid rep_rowid, 
         RTRIM(cast(f120_id as varchar(15))) rep_codi, 
         t120_mc_items.f120_referencia,
+		t120_mc_items.f120_id_unidad_inventario unidad,
         UPPER(RTRIM(SUBSTRING(f120_descripcion, 1, 40))) Descripcion,
         f150_id bod_codi,
+		t150_mc_bodegas.f150_descripcion descripcion_bodega,
         f401_id_ubicacion_aux rep_ubic,
         f120_id_tipo_inv_serv rep_tipr,
         ISNULL(f401_cant_existencia_1, 0) Existencia, 
