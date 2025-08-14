@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from connection import get_connection_gi
+from db.connection import get_connection_gi
 from fastapi.responses import JSONResponse
 from utils.fetch_all import fetch_all
 from fastapi import HTTPException

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from dotenv import load_dotenv
-from connection import get_connection_gi, get_connection_siesa
+from db.connection import get_connection_gi, get_connection_siesa
 from utils.is_reachable import is_reachable
 from utils.is_valid_ip import is_valid
 import os
