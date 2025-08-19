@@ -72,7 +72,7 @@ FROM
     LEFT JOIN t120_mc_items I 
         ON H.f121_rowid_item = I.f120_rowid
 WHERE
-    EC.f420_id_tipo_docto IN ('OCN', 'OCM', 'OCA', 'OCQ')
+    EC.f420_id_tipo_docto IN ('OCN', 'OCM', 'OCA', 'OCQ', 'OCP')
     AND TRY_CAST(EC.f420_fecha_ts_creacion AS DATE) >= GETDATE() - ?
     AND EC.f420_id_cia = 1
 ORDER BY
