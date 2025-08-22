@@ -9,7 +9,7 @@ router = APIRouter(
 )
 
 @router.get("/tasas_representativas", summary="Consulta las tasas representativas para USD ($) y EUR")
-def get_tasas_representativas(dias_atras: int):
+def get_tasas_representativas(dias_atras: int = 1):
     try:
         conn = get_connection_siesa()
         cursor = conn.cursor()
