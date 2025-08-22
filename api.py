@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import listas_gi, fichas_tecnicas, ordenes_compra, check_health, existencias_siesa
+from routers import listas_gi, fichas_tecnicas, ordenes_compra, check_health, existencias_siesa, trm
 from dotenv import load_dotenv
 import os
 
@@ -28,6 +28,7 @@ app.include_router(listas_gi.router)
 app.include_router(fichas_tecnicas.router)
 app.include_router(check_health.router)
 app.include_router(existencias_siesa.router)
+app.include_router(trm.router)
 
 if __name__ == "__main__":
     import uvicorn
