@@ -3,6 +3,13 @@ name: Deploy API GELCO
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
+      - '.dockerignore'
+      - '.docker-compose.yml'
+      - 'pytest.ini'
+      - 'requirements.txt'
 
 jobs:
   deploy:
